@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="来源于网络的图片：" />
+
+    <!-- fresco不支持wrap_content属性
+         placeholderImage：图片没加载出来时所显示的图片
+         retryImage：重新加载时显示的图片
+         failureImage：图片加载失败时显示的图片
+         placeholderImageScaleType：图片的缩放类型
+         failureImageScaleType：加载失败图片的缩放类型-->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/urlImage"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        fresco:placeholderImage="@mipmap/loading"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:retryImage="@mipmap/loading"
+        fresco:retryImageScaleType="centerCrop"
+        fresco:failureImage="@mipmap/load_fail"
+        fresco:failureImageScaleType="centerInside" />
+
+    <!-- frescoroundAsCircle设置圆形图片只需要设置一个属性即可以
+         实现原型，同时还可以设置圆形的边框颜色等等-->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/circleImageDraweeView"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        fresco:roundAsCircle="true"
+        fresco:placeholderImage="@mipmap/loading"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:retryImage="@mipmap/loading"
+        fresco:retryImageScaleType="centerCrop"
+        fresco:failureImage="@mipmap/load_fail"
+        fresco:failureImageScaleType="centerInside" />
+</LinearLayout>
