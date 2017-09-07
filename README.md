@@ -1,12 +1,12 @@
-#1. Android应用加载网络图片
+# 1. Android应用加载网络图片
 
-##1.1 Android应用获取网络资源注意事项
+## 1.1 Android应用获取网络资源注意事项
 
 1. 需要添加访问网络权限
 
 2. 现在Android不允许在主线程中操作网络相关东西,所以和网络操作相关的代码要放在子线程中执行。
 
-##1.2 URL访问网络资源
+## 1.2 URL访问网络资源
 
 1.	创建url对象，根据url找到图片地址
 
@@ -16,7 +16,7 @@
 
 4.	UI组件显示图片
 
-##1.3 URLConnection访问网络资源
+## 1.3 URLConnection访问网络资源
 
 借助于URLConnection类应用程序可以非常方便的与指定站点交换信息：包括发送GET请求、POST请求，并获取网站的响应。
 
@@ -34,7 +34,7 @@
 
 7.	UI组件显示图片
 
-##1.4 HttpURLConnection访问网络资源
+## 1.4 HttpURLConnection访问网络资源
 
 HttpURLConnection是URLConnection子类。访问方式和URLConnection一样。
 
@@ -52,7 +52,7 @@ HttpURLConnection是URLConnection子类。访问方式和URLConnection一样。
 
 7.	UI组件显示图片
 
-##1.5 HttpClient访问（未经验证）
+## 1.5 HttpClient访问（未经验证）
 
 HttpClient是增强版HttpURLConnection。可以访问被保护的网站：需要用户登录和用户权限的网站。
 
@@ -72,7 +72,7 @@ HttpClient是增强版HttpURLConnection。可以访问被保护的网站：需�
 
 8.	UI组件显示图片
 
-##1.6 WebView浏览
+## 1.6 WebView浏览
 
 WebView本身是一个浏览器实现，内核基于开源WebKit引擎。
 注意：有一点问题，就是第一次加载时，如果图片没获取到会出现错误的图片
@@ -81,9 +81,9 @@ WebView本身是一个浏览器实现，内核基于开源WebKit引擎。
 
 2.	使用WebView自身的loadUrl(String url)方法通过url加载图片
 
-#2. 使用开源库加载图片
+# 2. 使用开源库加载图片
 
-##2.1 开源库的优点
+## 2.1 开源库的优点
 
 1. 使用简单
 都可以通过一句代码可实现图片获取和显示。
@@ -104,15 +104,15 @@ WebView本身是一个浏览器实现，内核基于开源WebKit引擎。
 6. 其他小共同点
 包括支持动画、支持 transform 处理、获取 EXIF 信息等。
 
-##2.2 ImageLoader 
+## 2.2 ImageLoader 
 
-###2.2.1 设计及流程
+### 2.2.1 设计及流程
 
 整个库分为 ImageLoaderEngine，Cache 及 ImageDownloader，ImageDecoder，BitmapDisplayer，BitmapProcessor 五大模块，其中 Cache 分为 MemoryCache 和 DiskCache 两部分。
 ImageLoader 收到加载及显示图片的任务，并将它交给 ImageLoaderEngine，ImageLoaderEngine 分发任务到具体线程池去执行，任务通过 Cache 及 ImageDownloader 获取图片，中间可能经过 BitmapProcessor 和 ImageDecoder 处理，最终转换为Bitmap 交给 BitmapDisplayer 在 ImageAware 中显示。
 ![这里写图片描述](http://img.blog.csdn.net/20170907195454805?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemNuNTk2Nzg1MTU0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
  
-###2.2.2 功能特性
+### 2.2.2 功能特性
 
 1. 多线程异步加载和显示图片（图片来源于网络、sd卡、assets文件夹，drawable文件夹（不能加载9patch），新增加载视频缩略图）
 
@@ -126,7 +126,7 @@ ImageLoader 收到加载及显示图片的任务，并将它交给 ImageLoaderEn
 
 6. 在网络速度较慢时，还可以对图片进行加载并设置下载监听
 
-###2.2.3 使用步骤
+### 2.2.3 使用步骤
 
 1. 添加jar包
 
@@ -140,15 +140,15 @@ ImageLoader 收到加载及显示图片的任务，并将它交给 ImageLoaderEn
 
 6. 显示图片
 
-##2.3 Picasso 
+## 2.3 Picasso 
 
-###2.3.1 设计及流程
+### 2.3.1 设计及流程
 
 整个库分为 Dispatcher，RequestHandler 及 Downloader，PicassoDrawable 等模块。
 Picasso 收到加载及显示图片的任务，创建 Request 并将它交给 Dispatcher，Dispatcher 分发任务到具体 RequestHandler，任务通过 MemoryCache 及 Handler(数据获取接口) 获取图片，图片获取成功后通过 PicassoDrawable 显示到 Target 中。
 ![这里写图片描述](http://img.blog.csdn.net/20170907195522228?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemNuNTk2Nzg1MTU0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
  
-###2.3.2 功能特性
+### 2.3.2 功能特性
 
 1.自带统计监控功能
 支持图片缓存使用的监控，包括缓存命中率、已使用内存大小、节省的流量等。
@@ -165,7 +165,7 @@ Picasso 收到加载及显示图片的任务，创建 Request 并将它交给 Di
 5.无”本地缓存
 “无”本地缓存，不是说没有本地缓存，而是 Picasso 自己没有实现，交给了 Square 的另外一个网络库 okhttp 去实现，这样的好处是可以通过请求 Response Header 中的 Cache-Control 及 Expired 控制图片的过期时间。
 
-###2.3.3 使用步骤
+### 2.3.3 使用步骤
 
 1. 添加jar包
 
@@ -173,9 +173,9 @@ Picasso 收到加载及显示图片的任务，创建 Request 并将它交给 Di
 
 3. 配置并显示图片
 
-##2.4 Glide
+## 2.4 Glide
 
-###2.4.1 设计及流程
+### 2.4.1 设计及流程
 整个库分为 RequestManager（请求管理器），Engine（数据获取引擎）、Fetcher（数据获取器）、MemoryCache（内存缓存）、DiskLRUCache、Transformation（图片处理）、Encoder（本地缓存存储）、Registry（图片类型及解析器配置）、Target（目标）等模块。
 
 Glide 收到加载及显示资源的任务，创建 Request 并将它交给RequestManager，Request 启动 Engine 去数据源获取资源(通过 Fetcher )，获取到后 Transformation 处理后交给 Target。
@@ -183,7 +183,7 @@ Glide 收到加载及显示资源的任务，创建 Request 并将它交给Reque
 Glide 依赖于 DiskLRUCache、GifDecoder 等开源库去完成本地缓存和 Gif 图片解码工作。
 ![这里写图片描述](http://img.blog.csdn.net/20170907195549045?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemNuNTk2Nzg1MTU0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
  
-###2.4.2 功能特性
+### 2.4.2 功能特性
 
 1.图片缓存->媒体缓存
 Glide 不仅是一个图片缓存，它支持 Gif、WebP、缩略图。甚至是 Video，所以更该当做一个媒体缓存。
@@ -210,7 +210,7 @@ Glide 以 url、viewwidth、viewheight、屏幕的分辨率等做为联合 key�
 
 （5）其他：Glide 可以通过 signature 或不使用本地缓存支持 url 过期
 
-###2.4.3 使用步骤
+### 2.4.3 使用步骤
 
 1. 添加jar包
 
@@ -218,9 +218,9 @@ Glide 以 url、viewwidth、viewheight、屏幕的分辨率等做为联合 key�
 
 3. 配置并显示图片
 
-##2.5 Fresco
+## 2.5 Fresco
 
-###2.5.1 设计及流程
+### 2.5.1 设计及流程
 核心类：
 DraweeView(子类：SimpleDraweeView),DraweeHierarchy(子类：GenericDraweeHierarchy),DraweeController。(类似MVC)
 
@@ -236,7 +236,7 @@ DraweeController：
 Fresco的Image Pipeline
 ![这里写图片描述](http://img.blog.csdn.net/20170907195620242?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemNuNTk2Nzg1MTU0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
  
-###2.5.2 功能特性
+### 2.5.2 功能特性
 1.内存管理
     在5.0以下系统，Fresco将图片放到一个特别的内存区域。在图片不显示的时候，占用的内存会自动被释放。这会使得APP更加流畅，减少因图片内存占用而引发的OOM。
     
@@ -264,7 +264,7 @@ Fresco的Image Pipeline允许用户用很多种方式来自定义图片加载过
 5.动图加载
     Fresco 支持 GIF 和 WebP 格式的动画图片。
     
-###2.5.3 使用步骤
+### 2.5.3 使用步骤
 
 1.Manifest.xml文件中添加网络和读写SD卡权限
 
@@ -307,9 +307,9 @@ xmlns:fresco="http://schemas.android.com/apk/res-auto";
  draweeView.setImageURI(uri);
 ```
 
-##2.6 Volley 
+## 2.6 Volley 
 
-###2.6.1 设计及流程
+### 2.6.1 设计及流程
 
 主要是通过两种Diapatch Thread不断从RequestQueue中取出请求，根据是否已缓存调用Cache或Network这两类数据获取接口之一，从内存缓存或是服务器取得请求的数据，然后交由ResponseDelivery去做结果分发及回调处理。
 ![这里写图片描述](http://img.blog.csdn.net/20170907195646893?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemNuNTk2Nzg1MTU0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
@@ -317,7 +317,7 @@ xmlns:fresco="http://schemas.android.com/apk/res-auto";
 主线程中调用RequestQueue的add()方法来添加一条网络请求，这条请求会先被加入到缓存队列当中，如果发现可以找到相应的缓存结果就直接读取缓存并解析，然后回调给主线程。如果在缓存中没有找到结果，则将这条请求加入到网络请求队列中，然后处理发送HTTP请求，解析响应结果，写入缓存，并回调主线程。
 ![这里写图片描述](http://img.blog.csdn.net/20170907195658535?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemNuNTk2Nzg1MTU0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
  
-###2.6.2 功能特性
+### 2.6.2 功能特性
 
 1. 通信更快，更简单，更健壮
 
@@ -331,7 +331,7 @@ xmlns:fresco="http://schemas.android.com/apk/res-auto";
 
 6. 和Activity生命周期的联动（当Activity销毁的时候可以同时取消正在进行的网络请求操作，提高性能）
 
-###2.6.3 使用步骤
+### 2.6.3 使用步骤
 
 使用imageRequest加载图片：
 1）创建一个RequestQueue对象。
@@ -351,7 +351,7 @@ xmlns:fresco="http://schemas.android.com/apk/res-auto";
 4）在代码中获取该控件的实例。
 5）设置要加载的图片地址
 
-##2.7 几种开源库的区别
+## 2.7 几种开源库的区别
 
 1. fresco是重量级库，适合大型应用不适合小应用。ImageLoader、Glide、picasso是轻量级图片框架适合小型应用。Volley适合网络通信操作频繁但数据量小的操作，不适合大数据量的网络操作。
 
